@@ -2,6 +2,8 @@
 pragma solidity >=0.4.22 <0.9.0;
 import './Ownable.sol';
 import './Stakeable.sol';
+//address(this)是合约的地址，msg.sender是合约调用者的地址。
+
 //加入一个库 SafeMath辅助运算
 library SafeMath {
   /**
