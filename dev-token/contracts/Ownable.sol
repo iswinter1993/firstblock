@@ -3,7 +3,7 @@ pragma solidity ^0.8.4;
 contract Ownable {
     //定义私有变量_owner
     address private _owner ;
-    //事件 OwnershipTransferred 用于记录令牌的所有权更改已发生
+    //事件 OwnershipTransferred 用于记录token的所有权更改已发生
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
     //创建修饰符onlyOwner
