@@ -1,0 +1,63 @@
+{
+  "name": "umi-antd-mobile",
+  "version": "0.0.1",
+  "author": "Yanghc",
+  "description": "基于umi@3.x + antd-mobile@next 快速构建h5及app应用",
+  "private": true,
+  "scripts": {
+    "analyze": "cross-env ANALYZE=1 umi build",
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged",
+    "commit-msg": "fabric verify-commit"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@types/react-transition-group": "^4.4.4",
+    "antd-mobile": "^5.10.2",
+    "antd-mobile-icons": "^0.2.2",
+    "bignumber": "^1.1.0",
+    "bignumber.js": "^9.0.2",
+    "byte-base64": "^1.1.0",
+    "google-protobuf": "^3.14.0",
+    "lodash": "^4.17.21",
+    "postcss": "^8.4.5",
+    "protobufjs": "^6.11.2",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "react-router-breadcrumbs-hoc": "^4.1.0",
+    "react-transition-group": "^4.4.2",
+    "umi": "^3.5.20",
+    "web3-eth": "^1.7.3"
+  },
+  "devDependencies": {
+    "@types/mockjs": "^1.0.6",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@umijs/fabric": "^2.10.1",
+    "@umijs/preset-react": "2.x",
+    "@umijs/test": "^3.5.20",
+    "lint-staged": "^12.3.3",
+    "mockjs": "^1.1.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "prettier": "^2.5.1",
+    "typescript": "^4.5.5",
+    "yorkie": "^2.0.0"
+  }
+}
