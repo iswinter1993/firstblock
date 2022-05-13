@@ -33,7 +33,7 @@ const HomeMainView = (props: any) => {
           <p> Welcome to your DAPP</p>
           <p>The total supply is {totalSupply}</p>
           <p>Account balance: {accountBalance}</p>
-          <p>User HasStake: {userHasStake}</p>
+          <p>User HasStake: {userHasStake&&userHasStake[0]}</p>
           <button onClick={stake}><p>Stake</p></button>
         </header>
       </div>
