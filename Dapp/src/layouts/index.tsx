@@ -11,7 +11,9 @@ export interface TabBarItemValueProps {
   messageBadge?: BadgeProps['content'];
   meBadge?: BadgeProps['content'];
 }
-
+export interface OptionProps {
+  filter?:{}
+}
 export const TabBarContext = React.createContext<{
   items: TabBarItemValueProps;
   callback?: (values: TabBarItemValueProps) => void;
@@ -26,7 +28,14 @@ export const TabBarContext = React.createContext<{
  */
 
 const PageView = (props: any) => {
-  const { dispatch } = props
+
+  const { dispatch,accounts,devToken } = props
+  let options = {
+    filter: {
+        address: [accounts[0]]
+    },
+  };
+
   useEffect(()=>{
     getInit()
   },[])
@@ -40,6 +49,28 @@ const PageView = (props: any) => {
     await dispatch({
       type:'baseData/getTokenEffects'
     })
+  }
+
+  useEffect(()=>{
+    if(accounts.length>0 && devToken){
+      subscriptions(options)
+    }
+  },[accounts,devToken])
+
+  const subscriptions = async (options:OptionProps) => {
+    // Our contract has a field called events which has all Available events.
+    //合约中自带的通用事件
+    console.log('监听事件=====')
+    devToken.events.Staked(options).
+    on('data',(event:any)=>console.log('Data:',event)) //以日志对象作为参数在每个传入日志上触发
+    .on('changed',(changed:any)=>console.log('Changed:',changed))//在从区块链中删除的每个日志上触发。日志将具有附加属性"removed: true"。
+    .on('error',(error:any)=>console.log('Error:',error))//当订阅中发生错误时触发。
+    .on('connected',(connected:any)=>console.log('Connected:',connected))//返回String：订阅成功连接后触发一次。返回订阅 ID。
+    devToken.events.Transfer(options)
+    .on('data',(event:any)=>console.log('Data:',event)) //以日志对象作为参数在每个传入日志上触发
+    .on('changed',(changed:any)=>console.log('Changed:',changed))//在从区块链中删除的每个日志上触发。日志将具有附加属性"removed: true"。
+    .on('error',(error:any)=>console.log('Error:',error))//当订阅中发生错误时触发。
+    .on('connected',(connected:any)=>console.log('Connected:',connected))//返回String：订阅成功连接后触发一次。返回订阅 ID。
   }
   const [taBarItemValues, setTabBarItemValues] = useState<
     TabBarItemValueProps | any

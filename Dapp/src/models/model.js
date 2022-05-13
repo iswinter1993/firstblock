@@ -4,7 +4,7 @@ import Web3 from 'web3-eth';
 import { Toast } from 'antd-mobile';
 
 // connectMetaMask is used to connect to MetaMask and ask permission to grab account information
-const connectMetaMask = async () => {
+const connectMetaMask = async () => {//链接钱包
   // We need to make the connection to MetaMask work.
   // Send Request for accounts and to connect to metamask.
   try {
@@ -19,7 +19,7 @@ const connectMetaMask = async () => {
   }
 };
 
-const connectToSelectedNetwork = async (contractAddr) => {
+const connectToSelectedNetwork = async (contractAddr) => {//链接合约
   // This will connect to the selected network inside MetaMask
   const web3 = new Web3(Web3.givenProvider);
   // Set the ABI of the Built contract so we can interact with it
@@ -32,7 +32,7 @@ const connectToSelectedNetwork = async (contractAddr) => {
 };
 
 // getUserProfile will fetch account information from the block chain network
-const getUserProfile = async (params) => {
+const getUserProfile = async (params) => {//获取信息
   console.log('params:',params)
   const {devtoken,accounts} = params;
   // Let's grab the tokens total supply, the method is named the same as in the Solidity code, and add call() to execute it. 
@@ -45,6 +45,7 @@ const getUserProfile = async (params) => {
   const hasStake = await devtoken.methods.hasStake(accounts[0]).call();
   return {devTokenSupply,balanceOf,hasStake};
 }
+
 export default {
   //命名空间
   namespace: 'baseData',
@@ -53,10 +54,11 @@ export default {
     abi: {},
     accounts: [],
     contractAddr: '0xf9CA807eb155F0060e3B41C0329aF53Bc13839a4',
-    devToken: {},
+    devToken: null,
     totalSupply: null,
     accountBalance:null,
-    userHasStake:null
+    userHasStake:null,
+    allreward:null
   },
   effects: {
     //管理异步操作
@@ -159,6 +161,6 @@ export default {
         ...state,
         userHasStake: payload
       }
-    }
+    },
   },
 };
