@@ -44,6 +44,7 @@
     "react-router-breadcrumbs-hoc": "^4.1.0",
     "react-transition-group": "^4.4.2",
     "umi": "^3.5.20",
+    "web3": "^1.7.3",
     "web3-eth": "^1.7.3"
   },
   "devDependencies": {

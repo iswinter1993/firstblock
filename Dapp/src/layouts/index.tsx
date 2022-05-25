@@ -28,11 +28,13 @@ export const TabBarContext = React.createContext<{
  */
 
 const PageView = (props: any) => {
-
+  
   const { dispatch,accounts,devToken } = props
+
+  const [accountsstate,setaccountsstate] = useState()
   let options = {
     filter: {
-        address: [accounts[0]]
+        address: accounts?[accounts[0]]:[]
     },
   };
 
@@ -40,6 +42,7 @@ const PageView = (props: any) => {
     getInit()
   },[])
   const getInit = async ()=>{
+
     await dispatch({
       type:'baseData/getAbiEffects'
     })
@@ -52,7 +55,7 @@ const PageView = (props: any) => {
   }
 
   useEffect(()=>{
-    if(accounts.length>0 && devToken){
+    if(accounts?.length>0 && devToken){
       subscriptions(options)
     }
   },[accounts,devToken])
@@ -94,4 +97,4 @@ const PageView = (props: any) => {
     </TabBarContext.Provider>
   );
 };
-export default connect((props:any)=>({...props.baseData}))(PageView)
+export default connect((props:any)=>({...props.baseData}))(React.memo(PageView))

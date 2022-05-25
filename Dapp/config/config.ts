@@ -16,13 +16,13 @@ export default defineConfig({
   nodeModulesTransform: {
     type: "none"
   },
-  // proxy: { //配置代理
-  //   '/api': {
-  //     'target': 'http://192.168.0.65:5001/',
-  //     'changeOrigin': true,
-  //     'pathRewrite': { '^/api' : '' },
-  //   },
-  // },
+  proxy: { //配置代理
+    '/api': {
+      'target': 'https://www.okx.com/',
+      'changeOrigin': true,
+      'pathRewrite': { '^/api' : '' },
+    },
+  },
   antdMobile: {
     hd: true
   },
